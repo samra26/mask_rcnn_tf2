@@ -108,10 +108,10 @@ class CocoDataset(utils.Dataset):
         if auto_download is True:
             self.auto_download(dataset_dir, subset, year)
 
-        coco = COCO("{}/annotations/instances_{}{}.json".format(dataset_dir, subset, year))
+        coco = COCO("/kaggle/input/coco-minival/instances_minival2014.json")
         if subset == "minival" or subset == "valminusminival":
             subset = "val"
-        image_dir = "{}/{}{}".format(dataset_dir, subset, year)
+        image_dir = "{}/{}{}/{}{}".format(dataset_dir, subset, year, subset, year)
 
         # Load all classes or a subset?
         if not class_ids:
