@@ -108,10 +108,10 @@ class CocoDataset(utils.Dataset):
         if auto_download is True:
             self.auto_download(dataset_dir, subset, year)
 
-        coco = COCO("{}/annotations/instances_{}{}.json".format(dataset_dir, subset, year))
+        coco = COCO("/kaggle/input/coco2014/captions/annotations/instances_{}{}.json".format(subset, year))
         if subset == "minival" or subset == "valminusminival":
             subset = "val"
-        image_dir = "{}/{}{}".format(dataset_dir, subset, year)
+        image_dir = "{}/{}{}/{}{}".format(dataset_dir, subset, year, subset, year)
 
         # Load all classes or a subset?
         if not class_ids:
@@ -505,7 +505,7 @@ if __name__ == '__main__':
 
         # Training - Stage 2
         # Finetune layers from ResNet stage 4 and up
-        print("Fine tune Resnet stage 4 and up")
+        '''print("Fine tune Resnet stage 4 and up")
         model.train(dataset_train, dataset_val,
                     learning_rate=config.LEARNING_RATE,
                     epochs=120,
@@ -519,7 +519,7 @@ if __name__ == '__main__':
                     learning_rate=config.LEARNING_RATE / 10,
                     epochs=160,
                     layers='all',
-                    augmentation=augmentation)
+                    augmentation=augmentation)'''
 
     elif args.command == "evaluate":
         # Validation dataset
